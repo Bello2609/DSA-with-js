@@ -49,6 +49,5 @@ cities.insert("Conway", "head");
 cities.insert("Russellville", "Conway");
 cities.insert("Carlisle", "Russellville");
 cities.insert("Alma", "Russellville");
-
 console.log(cities.remove("Carlisle"));
 console.log(cities.display());
