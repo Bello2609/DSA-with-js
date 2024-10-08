@@ -10,7 +10,7 @@ function LList(){
     this.findPrevious = findPrevious;
     this.remove = remove;
     this.advance = advance;
-    
+    this.show = show;
 }
 
 function find(item){
@@ -55,6 +55,14 @@ function advance(n, item){
         current = current.element;
     }
     return current;
+}
+function show(n, item){
+    let count  = 0;
+    let current = this.find(item);
+    while((current.next != null) && (count < n)){
+        count++;
+        return current;
+    }
 }
 
 let cities = new LList();
