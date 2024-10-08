@@ -9,6 +9,7 @@ function LList(){
     this.display = display;
     this.findPrevious = findPrevious;
     this.remove = remove;
+    this.advance = advance;
 }
 
 function find(item){
@@ -43,11 +44,23 @@ function display(){
         console.log(currNode.next.element);
         currNode = currNode.next;
     }
+   
+}
+function advance(n, item){
+    let count  = 0;
+    let current = this.find(item);
+    while((current.next != null) && (count < n)){
+        count++;
+        current = current.next;
+    }
+    return current;
 }
 let cities = new LList();
 cities.insert("Conway", "head");
 cities.insert("Russellville", "Conway");
 cities.insert("Carlisle", "Russellville");
 cities.insert("Alma", "Russellville");
+cities.insert("Almamatata", "Alma");
 console.log(cities.remove("Carlisle"));
 console.log(cities.display());
+console.log("mymy: ",cities.advance(2, "Russellville"));
