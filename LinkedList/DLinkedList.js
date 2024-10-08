@@ -12,6 +12,7 @@ function Dlist(){
     this.findLast = findLast;
     this.find = find;
     this.dispReverse = dispReverse;
+    this.back = back;
 }
 
 function insert(newElement, item) {
@@ -52,7 +53,15 @@ function dispReverse(){
         currNode = currNode.previous
     }
 }
-
+function back(n, item){
+    let count = 0;
+    let current = this.find(item)
+    while(current.previous !== null && n < count){
+        count++;
+        current = current.previous;
+    }
+    return current;
+}
 let cities = new Dlist();
 cities.insert("Conway", "head");
 cities.insert("Russellville", "Conway");
@@ -60,6 +69,7 @@ cities.insert("Carlisle", "Russellville");
 cities.insert("Alma", "Russellville");
 console.log(cities.remove("Carlisle"));
 console.log(cities.dispReverse());
+console.log("back: ", cities.back(2, "Alma"));
 
 
 

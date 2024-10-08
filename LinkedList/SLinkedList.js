@@ -10,6 +10,7 @@ function LList(){
     this.findPrevious = findPrevious;
     this.remove = remove;
     this.advance = advance;
+    
 }
 
 function find(item){
@@ -51,10 +52,11 @@ function advance(n, item){
     let current = this.find(item);
     while((current.next != null) && (count < n)){
         count++;
-        current = current.next;
+        current = current.element;
     }
     return current;
 }
+
 let cities = new LList();
 cities.insert("Conway", "head");
 cities.insert("Russellville", "Conway");
