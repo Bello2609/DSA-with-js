@@ -42,8 +42,8 @@ function insert(newElement, item){
 function display(){
     let currNode = this.head;
     while(!(currNode.next == null)){
-        console.log(currNode.next.element);
         currNode = currNode.next;
+        console.log(currNode.element);
     }
    
 }
@@ -69,8 +69,51 @@ let cities = new LList();
 cities.insert("Conway", "head");
 cities.insert("Russellville", "Conway");
 cities.insert("Carlisle", "Russellville");
-cities.insert("Alma", "Russellville");
+cities.insert("Alma", "Carlisle");
 cities.insert("Almamatata", "Alma");
 console.log(cities.remove("Carlisle"));
-console.log(cities.display());
+cities.display();
 console.log("mymy: ",cities.advance(2, "Russellville"));
+// exercise
+function NodeG(element){
+    this.element = element;
+    this.next = null;
+}
+function GradeList(){
+    this.head = new NodeG("head")
+    this.insertG = insertG;
+    this.displayG = displayG;
+    this.findG = findG;
+}
+
+function findG(item){
+    let currentNode = this.head;
+    while(currentNode.element != item){
+        currentNode = currentNode.next;
+    }
+    return currentNode;
+}
+
+function insertG(newElement, item){
+    let newNode = new NodeG(newElement);
+    let currentNode = this.findG(item);
+    newNode.next = currentNode.next;
+    currentNode.next = newNode;
+}
+function displayG(){
+    let currentNode = this.head;
+    while(currentNode.next != null){
+        currentNode = currentNode.next;
+        console.log(currentNode.element);
+    }
+}
+
+let grade = new GradeList();
+grade.insertG("1", "head");
+grade.insertG("2", "1");
+grade.insertG("3", "2");
+grade.insertG("4", "3");
+grade.insertG("5", "4");
+grade.insertG("6", "5");
+grade.displayG();
+
