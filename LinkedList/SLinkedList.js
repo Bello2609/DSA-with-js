@@ -47,6 +47,7 @@ function display(){
     }
    
 }
+//question 1
 function advance(n, item){
     let count  = 0;
     let current = this.find(item);
@@ -56,6 +57,7 @@ function advance(n, item){
     }
     return current;
 }
+//question2
 function show(n, item){
     let count  = 0;
     let current = this.find(item);
@@ -64,7 +66,7 @@ function show(n, item){
         return current;
     }
 }
-
+//question4
 let cities = new LList();
 cities.insert("Conway", "head");
 cities.insert("Russellville", "Conway");
@@ -74,7 +76,7 @@ cities.insert("Almamatata", "Alma");
 console.log(cities.remove("Carlisle"));
 cities.display();
 console.log("mymy: ",cities.advance(2, "Russellville"));
-// exercise
+
 function NodeG(element){
     this.element = element;
     this.next = null;
@@ -117,3 +119,55 @@ grade.insertG("5", "4");
 grade.insertG("6", "5");
 grade.displayG();
 
+
+
+// question6
+function NodeK(element){
+    this.element = element;
+    this.next = null;
+}
+function Kill(){
+    this.head = head;
+    this.head.next = this.head;
+    this.findK = findK;
+    this.insertK = insertK;
+    this.killK  = killK; 
+    this.findPreviousK = findPreviousK;
+    this.removeK = removeK;
+}
+
+function insertK(newElement, item){
+    let newNode = new NodeK(newElement);
+    let current = this.find(item);
+    newNode.next = current.next;
+    current.next = newNode;
+}
+function findK(item){
+    let currNode = this.head;
+    while(currNode.element != item){
+        currNode = currNode.next;
+    }
+    return currNode;
+}
+function findPreviousK(item){
+    let currNode = this.head;
+    while(!(currNode.next == null) && (currNode.next.element != item)){
+        currNode = currNode.next;
+    }
+    return currNode;
+}
+
+function removeK(item){
+    let prevNode = this.findPreviousK(item);
+    if(!(prevNode.next == null)){
+        prevNode.next = prevNode.next.next;
+    }
+}
+function displayK(){
+    let currNode = this.head;
+    while(!(currNode.next == null) && !(currNode.next.element == "head")){
+        currNode = currNode.next;
+        console.log(currNode.element);
+    }
+   
+}
