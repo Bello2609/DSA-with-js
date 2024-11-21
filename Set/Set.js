@@ -11,6 +11,7 @@ function Set(){
     this.show = show;
     this.contain = contain;
     this.higher = higher;
+    this.lower = lower;
 }
 function add(data){
     if(this.dataStore.indexOf(data) < 0){
@@ -98,6 +99,15 @@ function higher(value){
     }
     
 }
+function lower(value){
+    let highest = 0;
+    for (let i = 0; i < this.dataStore.length; ++i){ 
+        if((this.dataStore[i] < value) > highest){
+            highest = this.dataStore[i];
+        }
+        return highest;
+    }
+}
 let names = new Set();
 names.add("26");
 names.add("10");
@@ -106,7 +116,7 @@ names.add("29");
 names.add("30");
 names.add("40");
 
-console.log(names.higher("22"));
+console.log(names.lower("29"));
 // let dmp = new Set();
 // dmp.add("Raymond");
 // dmp.add("Cynthia");
