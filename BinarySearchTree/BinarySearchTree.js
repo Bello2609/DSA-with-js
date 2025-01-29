@@ -1,8 +1,13 @@
 function Node(data, left, right){
     this.data = data;
+    this.count = 1;
     this.left = left;
     this.right = right;
     this.show = show;
+    this.insert = insert;
+    this.getMin = getMin;
+    this.getMax = getMax;
+    this.find = find;
 }
 function show(){
     return this.data;
@@ -110,7 +115,7 @@ function removeNode(node, data){
             return node.left;
         } 
         //node has two children
-        let tempNode = getSmallest(node.right);
+        let tempNode = getMin(node.right);
         node.data = tempNode.data;
         node.right = removeNode(node.right, tempNode.data);
         return node;
@@ -121,8 +126,21 @@ function removeNode(node, data){
         node.right = removeNode(node.right, data);
         return node;
     }
-    
 }
 function remove(data){
     return root = removeNode(this.root, data)
 }
+//this function will update the 
+function update(data){
+    let grade = this.find();
+    grade.count++;
+    return grade;
+}
+function genArray(length){
+    let arr = [];
+    for(let i = 0; i < length; i++){
+        arr[i] = Math.floor(Math.random() * 101);
+    }
+    return arr;
+}
+//exercise
