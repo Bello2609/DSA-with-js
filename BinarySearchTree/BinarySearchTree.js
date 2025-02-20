@@ -1,21 +1,21 @@
+const fs = require("fs");
 function Node(data, left, right){
     this.data = data;
     this.count = 1;
     this.left = left;
     this.right = right;
     this.show = show;
-    this.insert = insert;
-    this.getMin = getMin;
-    this.getMax = getMax;
-    this.find = find;
+    
 }
-function show(){
-    return this.data;
-}
+
 function BST(){
     this.root = null;
     this.insert = insert;
     this.inOrder = inOrder;
+    this.insert = insert;
+    this.getMin = getMin;
+    this.getMax = getMax;
+    this.find = find;
 }
 function insert(data){
     let n = new Node(data, null, null);
@@ -42,27 +42,12 @@ function insert(data){
         }
     }
 }
-function inOrder(node){
-    if(!(node == null)){
-        inOrder(node.left);
-        console.log(node.show());
-        inOrder(node.right);
-    }
+function update(data){
+    let grade = this.find();
+    grade.count++;
+    return grade;
 }
-function preOrder(node){
-    if(!(node == null)){
-        console.log(node.show());
-        preOrder(node.left);
-        preOrder(node.right)
-    }
-}
-function postOrder(node){
-    if(!(node == null)){
-        postOrder(node.left);
-        postOrder(node.right);
-        console.log(node.show());
-    }
-}
+
 //find the minimum number
 function getMin(){
     let current = this.root;
@@ -127,14 +112,34 @@ function removeNode(node, data){
         return node;
     }
 }
+function show(){
+    return this.data;
+}
+
+
 function remove(data){
     return root = removeNode(this.root, data)
 }
-//this function will update the 
-function update(data){
-    let grade = this.find();
-    grade.count++;
-    return grade;
+function inOrder(node){
+    if(!(node == null)){
+        inOrder(node.left);
+        console.log(node.show());
+        inOrder(node.right);
+    }
+}
+function preOrder(node){
+    if(!(node == null)){
+        console.log(node.show());
+        preOrder(node.left);
+        preOrder(node.right)
+    }
+}
+function postOrder(node){
+    if(!(node == null)){
+        postOrder(node.left);
+        postOrder(node.right);
+        console.log(node.show());
+    }
 }
 function genArray(length){
     let arr = [];
@@ -143,4 +148,44 @@ function genArray(length){
     }
     return arr;
 }
-//exercise
+//
+function NodeAlpha(data, left, right){
+    this.data = data
+    this.left = left;
+    this.right = right;
+    this.count  = 1;
+    this.show = show;
+}
+function BSTAlpha(){
+    this.root = null;
+    this.insert = insert;
+    this.show = show;
+    this.update = update;
+    this.count  = 1;
+    this.show = show;
+}
+const bst = new BSTAlpha();
+async function insertAlpha(){
+    try{
+        let data = fs.promises.readFile("fruit.txt", "utf-8");
+        let results = data.split("/n").map(data=>{
+        let value = data.trim();
+        return value;
+    });
+        return results;
+    }catch(err){
+        console.log(err);
+    }
+}
+(async()=>{
+    try{
+        let myData = await insertAlpha();
+        myData.forEach(data=>{
+            bst.insert(data);
+            console.log("No of Ocuurence of: " + bst.update(data));
+        })
+    }catch(err){
+        console.log(err);
+    }
+    
+})()
