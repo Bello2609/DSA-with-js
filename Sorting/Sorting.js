@@ -1,5 +1,6 @@
 function CArray(numElements) {
     this.dataStore = [];
+    this.gaps = [5, 3, 1];
     this.pos = 0;
     this.numElements = numElements;
     this.insert = insert;
@@ -11,6 +12,9 @@ function CArray(numElements) {
     this.selectionSort = selectionSort;
     this.insertionSort = insertionSort;
     this.shellSort = shellSort;
+     this.mergeArray = mergeArray;
+    this.mergeSort = mergeSort;
+   
     for (let i = 0; i < numElements; ++i) {
         this.dataStore[i] = i;
     }
@@ -97,6 +101,7 @@ function shellSort(){
     for(let g = 0; g < this.gaps.length; ++g){
         for(let i = this.gaps[g]; i < this.dataStore.length; ++i){
             let temp = this.dataStore[i];
+            let j = i
             for(let j = i; j >= this.gaps[g] && this.dataStore[j - this.gaps[g]]; j -= this.gaps[g]){
                 this.dataStore[j] = this.dataStore[j - this.gaps[g]];
             }
@@ -105,7 +110,58 @@ function shellSort(){
     }
     return this.toString();
 }
+function mergeArray(arr, startLeft, stopLeft, startRight, stopRight){
+    let rightArr = new Array(stopRight - startRight + 1);
+    let leftArr = new Array(stopLeft - startLeft + 1);
+    k = startRight;
+    for(let i = 0; i < (rightArr.length - 1); ++i){
+        leftArr[i] = arr[k];
+        ++k
+    }
+    k = startLeft;
+    for(let i = 0; i < (leftArr.length - 1); ++i){
+        leftArr[i] = arr[k];
+        ++k;
+    }
+    rightArr[rightArr.length - 1] = Infinity;
+    leftArr[leftArr.length - 1] = Infinity;
+    let m = 0;
+    let n = 0;
+    for(let k = startLeft; k < stopRight; ++k){
+        if(leftArr[m] <= rightArr[n]){
+            arr[k] = leftArr[m];
+            m++;
+        }else{
+            arr[k] = rightArr[n];
+            n++;
+        }
+    }
+    console.log("left array -", leftArr);
+    console.log("right array -", rightArr);
+}
+function mergeSort(){
+    if(this.dataStore.length < 2){
+        return;
+    }
+    let step = 1;
+    let left, right;
+    while(step < this.dataStore.length){
+        left = 0;
+        right = step;
+        while(right + step <= this.dataStore.length){
+            mergeArray(this.dataStore, left, left + step, right, right + step);
+            left = right + step;
+            right = left + step;
+           
+        }
+        if(right < this.dataStore.length){
+            mergeArray(this.dataStore, left, left + step, right, this.dataStore.length);
+        }
+        step *= 2;
+    }
+}
 let numElements = 10;
+
 let mynums = new CArray(numElements);
 mynums.setData();
 console.log("not sorted: ", mynums.toString());
@@ -117,3 +173,5 @@ mynums.insertionSort();
 console.log("insertion sort: ", mynums.toString());
 mynums.shellSort();
 console.log("shell sort: ", mynums.toString());
+mynums.mergeSort();
+console.log("merge sort: ", mynums.toString());
