@@ -10,6 +10,7 @@ function CArray(numElements) {
     this.bubbleSort = bubbleSort;
     this.selectionSort = selectionSort;
     this.insertionSort = insertionSort;
+    this.shellSort = shellSort;
     for (let i = 0; i < numElements; ++i) {
         this.dataStore[i] = i;
     }
@@ -92,6 +93,18 @@ function insertionSort(){
     }
     return this.toString();
 }
+function shellSort(){
+    for(let g = 0; g < this.gaps.length; ++g){
+        for(let i = this.gaps[g]; i < this.dataStore.length; ++i){
+            let temp = this.dataStore[i];
+            for(let j = i; j >= this.gaps[g] && this.dataStore[j - this.gaps[g]]; j -= this.gaps[g]){
+                this.dataStore[j] = this.dataStore[j - this.gaps[g]];
+            }
+            this.dataStore[j] = temp;
+        }
+    }
+    return this.toString();
+}
 let numElements = 10;
 let mynums = new CArray(numElements);
 mynums.setData();
@@ -102,3 +115,5 @@ mynums.selectionSort();
 console.log("selection sort: ", mynums.toString());
 mynums.insertionSort();
 console.log("insertion sort: ", mynums.toString());
+mynums.shellSort();
+console.log("shell sort: ", mynums.toString());
